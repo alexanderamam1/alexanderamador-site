@@ -18,6 +18,11 @@ const { Content } = await render(decision);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{decision.data.title} — Alexander Amador</title>
+    <meta name="description" content={decision.data.dek} />
+    <meta property="og:title" content={decision.data.title} />
+    <meta property="og:description" content={decision.data.dek} />
+    <meta property="og:type" content="article" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <main>
