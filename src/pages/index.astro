@@ -1,17 +1,147 @@
 ---
+import { getCollection } from 'astro:content';
 
+const allDecisions = await getCollection('decisions');
+const decisions = allDecisions
+  .filter(d => !d.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alexander Amador</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="site-name">Alexander Amador</p>
+        <p class="tagline">Analytics work, documented as decisions.</p>
+      </header>
+
+      <p class="intro">
+        This is a log of decisions I've made in data and analytics work, not a portfolio of artifacts.
+        Each entry is one call: the problem, the trade-offs, what I did, and what I learned.
+        The work is the thinking.
+      </p>
+
+      <ul class="decision-list">
+        {decisions.map(d => (
+          <li>
+            <a href={`/decisions/${d.data.slug}`}>
+              <p class="decision-title">{d.data.title}</p>
+              <p class="decision-teaser">{d.data.dek}</p>
+              <p class="decision-meta">{d.data.tag} · {new Date(d.data.date).toLocaleDateString('en-CA', { year: 'numeric', month: 'short' })}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+
+    <footer>
+      <a href="mailto:hello.alex.amador@hotmail.com">hello.alex.amador@hotmail.com</a> ·
+      <a href="https://linkedin.com/in/afav" target="_blank">LinkedIn</a>
+    </footer>
+  </body>
 </html>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+  font-family: 'Iowan Old Style', 'Source Serif Pro', Cambria, Georgia, serif;
+  background-color: #ffffff;
+  color-scheme: light;
+  color: #111;
+  padding: 2rem 1rem;
+}
+
+  main {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .site-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 0.3rem;
+  }
+
+  .tagline {
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+    line-height: 1.55;
+    margin-bottom: 2rem;
+  }
+
+  .intro {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #111;
+    margin-bottom: 3rem;
+  }
+
+  .decision-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  .decision-list a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: opacity 0.15s ease;
+  }
+
+  .decision-list a:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  .decision-title {
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: #111;
+    margin-bottom: 8px;
+  }
+
+  .decision-teaser {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .decision-meta {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  footer {
+    max-width: 560px;
+    margin: 4rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid #ddd;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 13px;
+    color: #555;
+  }
+
+  footer a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    color: #111;
+  }
+</style>
