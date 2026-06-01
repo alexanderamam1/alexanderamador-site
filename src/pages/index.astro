@@ -53,40 +53,53 @@ const decisions = allDecisions
 </html>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-  font-family: 'Iowan Old Style', 'Source Serif Pro', Cambria, Georgia, serif;
-  background-color: #ffffff;
-  color-scheme: light;
-  color: #111;
-  padding: 2rem 1rem;
-}
+    font-family: 'Crimson Pro', Georgia, serif;
+    background-color: #0a0a0a;
+    color-scheme: dark;
+    color: #e8e0d0;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    background-image: radial-gradient(circle, #2a2a2a 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
 
   main {
     max-width: 560px;
     margin: 0 auto;
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .site-name {
-    font-size: 15px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
     font-weight: 500;
-    color: #111;
+    color: #e8e0d0;
     margin-bottom: 0.3rem;
+    letter-spacing: 0.05em;
   }
 
   .tagline {
-    font-size: 14px;
+    font-size: 15px;
     font-style: italic;
-    color: #555;
+    color: #8a8070;
     line-height: 1.55;
     margin-bottom: 2rem;
   }
 
   .intro {
     font-size: 17px;
-    line-height: 1.7;
-    color: #111;
+    line-height: 1.75;
+    color: #c8bfad;
     margin-bottom: 3rem;
   }
 
@@ -101,11 +114,15 @@ const decisions = allDecisions
     text-decoration: none;
     color: inherit;
     display: block;
-    transition: opacity 0.15s ease;
+    padding-left: 0;
+    border-left: 2px solid transparent;
+    transition: all 0.15s ease;
   }
 
   .decision-list a:hover {
-    opacity: 0.6;
+    opacity: 1;
+    padding-left: 0.75rem;
+    border-left: 2px solid #c8a96e;
     cursor: pointer;
   }
 
@@ -113,33 +130,34 @@ const decisions = allDecisions
     font-size: 19px;
     font-weight: 500;
     line-height: 1.35;
-    color: #111;
+    color: #e8e0d0;
     margin-bottom: 8px;
   }
 
   .decision-teaser {
     font-size: 15px;
     line-height: 1.65;
-    color: #555;
+    color: #8a8070;
     margin-bottom: 10px;
   }
 
   .decision-meta {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    font-size: 11px;
-    letter-spacing: 1.4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.6px;
     text-transform: uppercase;
-    color: #999;
+    color: #c8a96e;
   }
 
   footer {
     max-width: 560px;
     margin: 4rem auto 0;
     padding-top: 1.5rem;
-    border-top: 0.5px solid #ddd;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    font-size: 13px;
-    color: #555;
+    border-top: 0.5px solid #2a2a2a;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #8a8070;
+    letter-spacing: 0.03em;
   }
 
   footer a {
@@ -148,6 +166,6 @@ const decisions = allDecisions
   }
 
   footer a:hover {
-    color: #111;
+    color: #c8a96e;
   }
 </style>
